@@ -31,6 +31,7 @@ class CrmDocument extends Model implements HasMedia
         'name',
         'description',
         'pending_invoice_id',
+        'status_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -70,5 +71,10 @@ class CrmDocument extends Model implements HasMedia
     public function packing_slip_details()
     {
         return $this->belongsToMany(PackingSlipDetail::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(CrmStatus::class, 'status_id');
     }
 }
