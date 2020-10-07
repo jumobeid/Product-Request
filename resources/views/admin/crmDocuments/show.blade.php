@@ -87,6 +87,14 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.crmDocument.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $crmDocument->status->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

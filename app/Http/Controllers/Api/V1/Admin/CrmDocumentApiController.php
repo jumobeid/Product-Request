@@ -20,7 +20,7 @@ class CrmDocumentApiController extends Controller
     {
         abort_if(Gate::denies('crm_document_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CrmDocumentResource(CrmDocument::with(['customer', 'purchased_items', 'pending_invoice', 'packing_slip_details'])->get());
+        return new CrmDocumentResource(CrmDocument::with(['customer', 'purchased_items', 'pending_invoice', 'packing_slip_details', 'status'])->get());
     }
 
     public function store(StoreCrmDocumentRequest $request)
@@ -42,7 +42,7 @@ class CrmDocumentApiController extends Controller
     {
         abort_if(Gate::denies('crm_document_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new CrmDocumentResource($crmDocument->load(['customer', 'purchased_items', 'pending_invoice', 'packing_slip_details']));
+        return new CrmDocumentResource($crmDocument->load(['customer', 'purchased_items', 'pending_invoice', 'packing_slip_details', 'status']));
     }
 
     public function update(UpdateCrmDocumentRequest $request, CrmDocument $crmDocument)
