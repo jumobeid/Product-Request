@@ -229,6 +229,8 @@ return [
             'pending_invoice_helper'     => ' ',
             'packing_slip_detail'        => 'Packing Slip Detail',
             'packing_slip_detail_helper' => ' ',
+            'status'                     => 'Status',
+            'status_helper'              => ' ',
         ],
     ],
     'purchasedItem'         => [

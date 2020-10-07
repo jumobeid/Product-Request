@@ -73,8 +73,8 @@
                 <span class="help-block">{{ trans('cruds.crmDocument.fields.purchased_items_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="pending_invoice_id">{{ trans('cruds.crmDocument.fields.pending_invoice') }}</label>
-                <select class="form-control select2 {{ $errors->has('pending_invoice') ? 'is-invalid' : '' }}" name="pending_invoice_id" id="pending_invoice_id">
+                <label class="required" for="pending_invoice_id">{{ trans('cruds.crmDocument.fields.pending_invoice') }}</label>
+                <select class="form-control select2 {{ $errors->has('pending_invoice') ? 'is-invalid' : '' }}" name="pending_invoice_id" id="pending_invoice_id" required>
                     @foreach($pending_invoices as $id => $pending_invoice)
                         <option value="{{ $id }}" {{ old('pending_invoice_id') == $id ? 'selected' : '' }}>{{ $pending_invoice }}</option>
                     @endforeach
@@ -87,12 +87,12 @@
                 <span class="help-block">{{ trans('cruds.crmDocument.fields.pending_invoice_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="packing_slip_details">{{ trans('cruds.crmDocument.fields.packing_slip_detail') }}</label>
+                <label class="required" for="packing_slip_details">{{ trans('cruds.crmDocument.fields.packing_slip_detail') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
-                <select class="form-control select2 {{ $errors->has('packing_slip_details') ? 'is-invalid' : '' }}" name="packing_slip_details[]" id="packing_slip_details" multiple>
+                <select class="form-control select2 {{ $errors->has('packing_slip_details') ? 'is-invalid' : '' }}" name="packing_slip_details[]" id="packing_slip_details" multiple required>
                     @foreach($packing_slip_details as $id => $packing_slip_detail)
                         <option value="{{ $id }}" {{ in_array($id, old('packing_slip_details', [])) ? 'selected' : '' }}>{{ $packing_slip_detail }}</option>
                     @endforeach
@@ -103,6 +103,20 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.crmDocument.fields.packing_slip_detail_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="status_id">{{ trans('cruds.crmDocument.fields.status') }}</label>
+                <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id" required>
+                    @foreach($statuses as $id => $status)
+                        <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.crmDocument.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

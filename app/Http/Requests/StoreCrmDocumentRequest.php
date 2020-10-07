@@ -38,11 +38,20 @@ class StoreCrmDocumentRequest extends FormRequest
                 'required',
                 'array',
             ],
+            'pending_invoice_id'     => [
+                'required',
+                'integer',
+            ],
             'packing_slip_details.*' => [
                 'integer',
             ],
             'packing_slip_details'   => [
+                'required',
                 'array',
+            ],
+            'status_id'              => [
+                'required',
+                'integer',
             ],
         ];
     }

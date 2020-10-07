@@ -9,6 +9,7 @@ use App\Http\Requests\StoreCrmDocumentRequest;
 use App\Http\Requests\UpdateCrmDocumentRequest;
 use App\Models\CrmCustomer;
 use App\Models\CrmDocument;
+use App\Models\CrmStatus;
 use App\Models\PackingSlipDetail;
 use App\Models\PendingInvoice;
 use App\Models\PurchasedItem;
@@ -42,7 +43,9 @@ class CrmDocumentController extends Controller
 
         $packing_slip_details = PackingSlipDetail::all()->pluck('packing_slip_number', 'id');
 
-        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details'));
+        $statuses = CrmStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'statuses'));
     }
 
     public function store(StoreCrmDocumentRequest $request)
@@ -74,9 +77,11 @@ class CrmDocumentController extends Controller
 
         $packing_slip_details = PackingSlipDetail::all()->pluck('packing_slip_number', 'id');
 
-        $crmDocument->load('customer', 'purchased_items', 'pending_invoice', 'packing_slip_details');
+        $statuses = CrmStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.crmDocuments.edit', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'crmDocument'));
+        $crmDocument->load('customer', 'purchased_items', 'pending_invoice', 'packing_slip_details', 'status');
+
+        return view('admin.crmDocuments.edit', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'statuses', 'crmDocument'));
     }
 
     public function update(UpdateCrmDocumentRequest $request, CrmDocument $crmDocument)
@@ -104,7 +109,7 @@ class CrmDocumentController extends Controller
     {
         abort_if(Gate::denies('crm_document_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $crmDocument->load('customer', 'purchased_items', 'pending_invoice', 'packing_slip_details');
+        $crmDocument->load('customer', 'purchased_items', 'pending_invoice', 'packing_slip_details', 'status');
 
         return view('admin.crmDocuments.show', compact('crmDocument'));
     }
