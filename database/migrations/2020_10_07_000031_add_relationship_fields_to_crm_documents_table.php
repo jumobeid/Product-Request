@@ -13,6 +13,8 @@ class AddRelationshipFieldsToCrmDocumentsTable extends Migration
             $table->foreign('customer_id', 'customer_fk_2337323')->references('id')->on('crm_customers');
             $table->unsignedInteger('pending_invoice_id')->nullable();
             $table->foreign('pending_invoice_id', 'pending_invoice_fk_2337469')->references('id')->on('pending_invoices');
+            $table->unsignedInteger('status_id')->nullable();
+            $table->foreign('status_id', 'status_fk_2343735')->references('id')->on('crm_statuses');
         });
     }
 }

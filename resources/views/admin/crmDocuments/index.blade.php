@@ -47,6 +47,9 @@
                             {{ trans('cruds.crmDocument.fields.packing_slip_detail') }}
                         </th>
                         <th>
+                            {{ trans('cruds.crmDocument.fields.status') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -88,6 +91,9 @@
                                 @foreach($crmDocument->packing_slip_details as $key => $item)
                                     <span class="badge badge-info">{{ $item->packing_slip_number }}</span>
                                 @endforeach
+                            </td>
+                            <td>
+                                {{ $crmDocument->status->name ?? '' }}
                             </td>
                             <td>
                                 @can('crm_document_show')
