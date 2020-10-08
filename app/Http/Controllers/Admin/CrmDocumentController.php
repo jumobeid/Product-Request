@@ -44,8 +44,18 @@ class CrmDocumentController extends Controller
         $packing_slip_details = PackingSlipDetail::all()->pluck('packing_slip_number', 'id');
 
         $statuses = CrmStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        
+        //create a variable that holds all the completed tasks
+		$empStatuses= CrmStatus::where('name', '=', 'New by Employee')->get();
 
-        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'statuses'));
+		//create a variable that holds all the not completed tasks
+		$adminStatuses= CrmStatus::where('name', '=', 'Approved by Store Manager')->get();
+
+		//return the view and passon the variable
+		
+
+
+        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'empStatuses','adminStatuses'));
     }
 
     public function store(StoreCrmDocumentRequest $request)

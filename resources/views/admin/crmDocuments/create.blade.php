@@ -108,9 +108,19 @@
             <div class="form-group">
                 <label for="status_id">{{ trans('cruds.crmDocument.fields.status') }}</label>
                 <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id">
-                    @foreach($statuses as $id => $status)
-                        <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
-                    @endforeach
+                @if (\Auth::user()->is_admin == true)  
+                 @foreach($adminStatuses as $name => $name)
+                         
+                         <option>1</option>
+                 @endforeach   
+                @else
+                @foreach($empStatuses as $name => $status)
+                         
+                         <option>2</option>
+                 @endforeach
+
+                 @endif     
+                  
                 </select>
                 @if($errors->has('status'))
                     <div class="invalid-feedback">
