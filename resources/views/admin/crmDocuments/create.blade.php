@@ -1,3 +1,5 @@
+use App\User;
+
 @extends('layouts.admin')
 @section('content')
 
@@ -108,18 +110,38 @@
             <div class="form-group">
                 <label for="status_id">{{ trans('cruds.crmDocument.fields.status') }}</label>
                 <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status_id" id="status_id">
-                @if (\Auth::user()->is_admin == true)  
-                 @foreach($adminStatuses as $name => $name)
-                         
-                         <option>1</option>
-                 @endforeach   
-                @else
-                @foreach($empStatuses as $name => $status)
-                         
-                         <option>2</option>
+                
+     
+                
+                
+                @if(\Auth::user()->roles()->where('id', 1)->exists() )
+                @foreach($statuses as $id => $status)
+                    <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
                  @endforeach
-
-                 @endif     
+    
+                @elseif(\Auth::user()->roles()->where('id', 2)->exists() )
+                @foreach($empStatuses as $name => $status)      
+                    <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
+                
+                @endforeach  
+                @elseif(\Auth::user()->roles()->where('id', 3)->exists() )
+                @foreach($empStatuses as $name => $status)      
+                    <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
+                
+                @endforeach  
+                @elseif(\Auth::user()->roles()->where('id', 4)->exists() )
+                @foreach($empStatuses as $name => $status)      
+                    <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
+                
+                
+                @endforeach 
+                @elseif(\Auth::user()->roles()->where('id', 5)->exists() )
+                @foreach($empStatuses as $name => $status)      
+                   <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
+                
+                
+                @endforeach 
+                @endif   
                   
                 </select>
                 @if($errors->has('status'))

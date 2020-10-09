@@ -51,6 +51,7 @@ class User extends Authenticatable
     {
         return $this->roles()->where('id', 1)->exists();
     }
+ 
 
     public function getEmailVerifiedAtAttribute($value)
     {
@@ -78,4 +79,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+   
 }

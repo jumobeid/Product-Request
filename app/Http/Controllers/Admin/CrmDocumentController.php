@@ -45,17 +45,26 @@ class CrmDocumentController extends Controller
 
         $statuses = CrmStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         
-        //create a variable that holds all the completed tasks
-		$empStatuses= CrmStatus::where('name', '=', 'New by Employee')->get();
+        //create a variable that holds emp permissions
+		$empStatuses= CrmStatus::select('name')->whereIn('id',['3','2'])->get();
 
-		//create a variable that holds all the not completed tasks
-		$adminStatuses= CrmStatus::where('name', '=', 'Approved by Store Manager')->get();
+		//create a variable that holds all the str Manager permissions
+		$strMngStatuses= CrmStatus::whereIn('name',['1','5','2','6','4'] )->get();
 
+
+        //create a variable that holds all the Dept Manager permissions
+		$deptMngStatuses= CrmStatus::whereIn('name',['7'] )->get();
+
+
+        //create a variable that holds all the Dept Manager permissions
+        $procMngStatuses= CrmStatus::whereIn('name',['8',
+        '9','10','11'] )->get();
 		//return the view and passon the variable
 		
 
 
-        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details', 'empStatuses','adminStatuses'));
+        return view('admin.crmDocuments.create', compact('customers', 'purchased_items', 'pending_invoices', 'packing_slip_details',
+         'empStatuses','strMngStatuses','statuses','deptMngStatuses','procMngStatuses'));
     }
 
     public function store(StoreCrmDocumentRequest $request)
