@@ -120,23 +120,23 @@ use App\User;
                  @endforeach
     
                 @elseif(\Auth::user()->roles()->where('id', 2)->exists() )
-                @foreach($empStatuses as $name => $status)      
+                @foreach($empStatuses as $id  => $status)      
                     <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
                 
                 @endforeach  
                 @elseif(\Auth::user()->roles()->where('id', 3)->exists() )
-                @foreach($empStatuses as $name => $status)      
+                @foreach($empStatuses as $id  => $status)      
                     <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
                 
                 @endforeach  
                 @elseif(\Auth::user()->roles()->where('id', 4)->exists() )
-                @foreach($empStatuses as $name => $status)      
+                @foreach($empStatuses as $id  => $status)      
                     <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
                 
                 
                 @endforeach 
                 @elseif(\Auth::user()->roles()->where('id', 5)->exists() )
-                @foreach($empStatuses as $name => $status)      
+                @foreach($empStatuses as $id  => $status)      
                    <option value="{{ $id }}" {{ old('status_id') == $id ? 'selected' : '' }}>{{ $status }}</option>
                 
                 

@@ -49,15 +49,15 @@ class CrmDocumentController extends Controller
 		$empStatuses= CrmStatus::select('name')->whereIn('id',['3','2'])->get();
 
 		//create a variable that holds all the str Manager permissions
-		$strMngStatuses= CrmStatus::whereIn('name',['1','5','2','6','4'] )->get();
+		$strMngStatuses= CrmStatus::select('name')->whereIn('id',['1','5','2','6','4'] )->get();
 
 
         //create a variable that holds all the Dept Manager permissions
-		$deptMngStatuses= CrmStatus::whereIn('name',['7'] )->get();
+		$deptMngStatuses= CrmStatus::select('name')->whereIn('id',['7'] )->get();
 
 
         //create a variable that holds all the Dept Manager permissions
-        $procMngStatuses= CrmStatus::whereIn('name',['8',
+        $procMngStatuses= CrmStatus::select('name')->whereIn('id',['8',
         '9','10','11'] )->get();
 		//return the view and passon the variable
 		
